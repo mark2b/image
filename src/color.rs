@@ -431,17 +431,6 @@ impl<T: Primitive + 'static> FromColor<Luma<T>> for Rgb<T> {
     }
 }
 
-impl<T: Primitive + 'static> FromColor<LumaA<T>> for Rgba<T> {
-    fn from_color(&mut self, other: &LumaA<T>) {
-        let rgba = self.channels_mut();
-        let gray = other.channels();
-        rgba[0] = gray[0];
-        rgba[1] = gray[0];
-        rgba[2] = gray[0];
-        rgba[3] = gray[1];
-    }
-}
-
 // BGR
 
 impl<T: Primitive + 'static> FromColor<Luma<T>> for Bgra<T> {
@@ -491,7 +480,7 @@ impl<T: Primitive + 'static> FromColor<Luma<T>> for Bgr<T> {
 
 impl<T: Primitive + 'static> FromColor<Bgr<T>> for Bgra<T> {
     fn from_color(&mut self, other: &Bgr<T>) {
-        let bgraa = self.channels_mut();
+        let bgra = self.channels_mut();
         let bgr = other.channels();
         bgra[0] = bgr[0];
         bgra[1] = bgr[1];
