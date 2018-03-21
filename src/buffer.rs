@@ -6,7 +6,7 @@ use std::io;
 use num_traits::Zero;
 
 use traits::Primitive;
-use color::{ Rgb, Rgba, Luma, LumaA, FromColor, ColorType };
+use color::{ Rgb, Rgba, Bgr, Bgra, Luma, LumaA, FromColor, ColorType };
 use image::GenericImage;
 use dynimage::save_buffer;
 use utils::expand_packed;
@@ -63,6 +63,12 @@ pub trait Pixel: Copy + Clone {
 
     /// Convert this pixel to RGB with an alpha channel
     fn to_rgba(&self) -> Rgba<Self::Subpixel>;
+
+    /// Convert this pixel to BGR
+    fn to_bgr(&self) -> Bgr<Self::Subpixel>;
+
+    /// Convert this pixel to BGR with an alpha channel
+    fn to_bgra(&self) -> Bgra<Self::Subpixel>;
 
     /// Convert this pixel to luma
     fn to_luma(&self) -> Luma<Self::Subpixel>;
@@ -605,6 +611,12 @@ impl<'a, 'b, Container, FromType: Pixel + 'static, ToType: Pixel + 'static>
 pub type RgbImage = ImageBuffer<Rgb<u8>, Vec<u8>>;
 /// Sendable Rgb + alpha channel image buffer
 pub type RgbaImage = ImageBuffer<Rgba<u8>, Vec<u8>>;
+
+/// Sendable Bgr image buffer
+pub type BgrImage = ImageBuffer<Bgr<u8>, Vec<u8>>;
+/// Sendable Rgb + alpha channel image buffer
+pub type BgraImage = ImageBuffer<Bgra<u8>, Vec<u8>>;
+
 /// Sendable grayscale image buffer
 pub type GrayImage = ImageBuffer<Luma<u8>, Vec<u8>>;
 /// Sendable grayscale + alpha channel image buffer
